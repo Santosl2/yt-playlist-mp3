@@ -1,6 +1,6 @@
 # yt-playlist-mp3
 
-⚠ You must use this module/cli respecting the [YouTube's Copyright Policies](https://www.youtube.com/intl/en/about/copyright/#support-and-troubleshooting).
+⚠ You must use this module respecting the [YouTube's Copyright Policies](https://www.youtube.com/intl/en/about/copyright/#support-and-troubleshooting).
 
 - [Requirements](#Requirements)
 - [Installation](#installation)
