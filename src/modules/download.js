@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 /**
  *
  * @param {string} id the video from which to extrapolate the sound
- * @param {!string} fileName optinal filename output
+ * @param {string} fileName filename output
  * @returns {Promise<object>} metadata of the mp3 file generated
  */
 async function download(videoId, fileName, downloadLocale) {
@@ -82,6 +82,7 @@ async function download(videoId, fileName, downloadLocale) {
 /**
  *
  * @param {string} playlistId the id of the playlist to extract the sounds
+ * @param {string} downloadLocale the download locale
  * @returns {Promise<[object]>} the results of the downloading, will contains errors and success
  */
 async function downloadPlaylist(playlistId, downloadLocale) {
