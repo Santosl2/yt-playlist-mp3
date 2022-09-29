@@ -17,27 +17,35 @@
 
 1- Clone this repo
 
-2- Run the command
+2- Change your youtube playlist url in `src/index.ts` file
+
+3- Run the command
 
 ```bash
-yarn && yarn start
+yarn && yarn dev
 ```
 
 or
 
 ```bash
-npm i && npm run start
+npm i && npm run dev
 ```
 
 <br/>
 
 ## Usage
 
-You can use this lib as a module also!
+1- Change your youtube playlist url in `src/index.ts` file
 
-1- change in `src/index.js` the playlist Id to your playlist Id
+2- Run the step 3 of the [Installation](#installation) section
 
-2- Run `npm run start`
+3- You can find your files in the `downloads` folder
+
+## Settings
+
+You can change the settings in the `src/configs/index.ts` file
+
+```ts
 
 ## License
 
@@ -46,3 +54,4 @@ Copyright [MIT](./LICENSE).
 ## Special Thanks
 
 - Eomm
+```

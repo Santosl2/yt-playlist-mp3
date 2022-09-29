@@ -4,14 +4,19 @@ import ffmpeg from "fluent-ffmpeg";
 
 import { ALLOWED_EXTENSION } from "../interfaces/File";
 import { NameGenerator } from "./NameGenerator";
-import { DOWNLOAD_PATH, TMP_PATH, verifyFileExists } from "../helpers";
+import {
+  deleteFile,
+  DOWNLOAD_PATH,
+  TMP_PATH,
+  verifyFileExists,
+} from "../helpers";
 
 interface IDownload {
   startItemDownload: () => Promise<any>;
 
   download: (format: ALLOWED_EXTENSION, log: boolean) => Promise<unknown>;
 
-  insertVideoAudio: (
+  downloadAndInsertVideoAudio: (
     stream: ffmpeg.FfmpegCommand
   ) => Promise<ffmpeg.FfmpegCommand | undefined>;
 }
@@ -34,27 +39,31 @@ export class Download implements IDownload {
     this.video = video;
   }
 
-  async insertVideoAudio(
+  async downloadAndInsertVideoAudio(
     stream: ffmpeg.FfmpegCommand
   ): Promise<ffmpeg.FfmpegCommand | undefined> {
-    const audioName = `${this.nameGenerator.randomNameGenerator()}.mp3`;
-    const path = TMP_PATH(audioName);
-
-    if (!verifyFileExists(path)) return undefined;
-
     await this.download("mp3", true);
 
-    return stream.input(path);
+    const audioPath = TMP_PATH(this.fileName);
+
+    return stream.input(audioPath);
   }
 
   async download(
     format = this.fileFormat,
     isAudioDownload = false
   ): Promise<unknown> {
-    const video = this.video;
+    const { video } = this;
+    const PATH = !isAudioDownload ? DOWNLOAD_PATH : TMP_PATH;
 
     if (!video) {
-      return "Video is not defined";
+      console.log("Video is not defined");
+      return;
+    }
+
+    if (verifyFileExists(PATH(this.fileName))) {
+      console.log("File already exists => ", this.fileName);
+      return;
     }
 
     const videoUrl = this.YOUTUBE_URL + video.id;
@@ -70,10 +79,8 @@ export class Download implements IDownload {
     // When downloading mp4, we need to download the video and audio separately
     // and then merge them together
     if (format === "mp4") {
-      await this.insertVideoAudio(command);
+      await this.downloadAndInsertVideoAudio(command);
     }
-
-    const PATH = !isAudioDownload ? DOWNLOAD_PATH : TMP_PATH;
 
     const promise = new Promise((resolve, reject) => {
       command
@@ -83,8 +90,12 @@ export class Download implements IDownload {
           if (!isAudioDownload) console.log("Downloading ", video.title);
         })
         .on("end", () => {
-          if (!isAudioDownload)
+          if (!isAudioDownload) {
             console.log("Download complete => ", video.title);
+
+            // Delete Audio TMP file
+            deleteFile(TMP_PATH(this.fileName));
+          }
 
           resolve(video);
         })
@@ -101,11 +112,14 @@ export class Download implements IDownload {
     return promise;
   }
 
-  async startItemDownload(fileFormat: ALLOWED_EXTENSION = "mp3") {
+  async startItemDownload(
+    fileFormat: ALLOWED_EXTENSION | undefined = undefined
+  ) {
+    const format = fileFormat || this.fileFormat;
     try {
       this.fileName = `${this.nameGenerator.replaceTextCharacters(
         this.video.title
-      )}.${fileFormat}`;
+      )}.${format}`;
 
       const ytFile = await this.download();
       return ytFile;

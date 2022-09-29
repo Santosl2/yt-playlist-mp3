@@ -1,4 +1,4 @@
-import { Playlist } from "./modules2/Playlist";
+import { Playlist } from "./modules";
 
 // Insert your playlist URL
 const PLAYLIST_SLUG = "PLJmKgWXZQlJPV7o8Ex9oWVi26MGLdBABA";

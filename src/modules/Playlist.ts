@@ -3,6 +3,7 @@ import { ALLOWED_EXTENSION } from "../interfaces/File";
 import { from } from "rxjs";
 import { mergeMap, toArray } from "rxjs/operators";
 import { Download } from "./Download";
+import { MAX_PARALLEL_DOWNLOAD } from "../configs";
 
 interface IPlaylistInfo {
   getPlaylistInfo: () => Promise<ytpl.Result>;
@@ -10,8 +11,6 @@ interface IPlaylistInfo {
 }
 
 export class Playlist implements IPlaylistInfo {
-  private MAX_PARALLEL_DOWNLOAD = 1;
-
   private fileFormat: ALLOWED_EXTENSION;
   private playlistId: string;
 
@@ -39,7 +38,7 @@ export class Playlist implements IPlaylistInfo {
           const downloadClass = new Download(video, this.fileFormat);
 
           return downloadClass.startItemDownload();
-        }, this.MAX_PARALLEL_DOWNLOAD)
+        }, MAX_PARALLEL_DOWNLOAD)
       )
       .pipe(toArray())
       .toPromise();
