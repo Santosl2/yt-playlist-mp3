@@ -29,7 +29,11 @@ export class Playlist implements IPlaylistInfo {
     const playlistInfo = await this.getPlaylistInfo();
     const playlistVideoItems = playlistInfo.items;
 
-    console.log(`Started playlist download in ${this.fileFormat} format`);
+    console.log(
+      `Started ${
+        playlistInfo.title
+      } playlist download in ${this.fileFormat.toUpperCase()} format`
+    );
 
     const videoObservable = from(playlistVideoItems);
     return videoObservable

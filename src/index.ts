@@ -1,7 +1,7 @@
 import { Playlist } from "./modules";
 
 // Insert your playlist URL
-const PLAYLIST_SLUG = "PLJmKgWXZQlJPV7o8Ex9oWVi26MGLdBABA";
+const PLAYLIST_SLUG = "PL7UGDcfHSfuop-pDmKQS8Fuv69GHczPYx";
 
 const playlist = new Playlist(PLAYLIST_SLUG, "mp4");
 
