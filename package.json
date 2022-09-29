@@ -1,15 +1,15 @@
 {
   "name": "youtubepl",
   "version": "1.0.0",
-  "description": "",
+  "description": "Download youtube playlist",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
     "start": "node src/index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Santosl2",
+  "license": "MIT",
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2",
     "rxjs": "^7.5.6",

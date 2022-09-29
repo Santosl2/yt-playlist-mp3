@@ -1,2 +1,4 @@
 node_modules
 src/downloads/*.mp3
+src/downloads/*.mp4
+src/tmp/*.mp3
