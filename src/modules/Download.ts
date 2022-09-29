@@ -2,7 +2,7 @@ import ytpl from "ytpl";
 import ytdl from "ytdl-core";
 import ffmpeg from "fluent-ffmpeg";
 
-import { ALLOWED_EXTENSION } from "../interfaces/File";
+import { ALLOWED_EXTENSION, IDownload } from "../interfaces";
 import { NameGenerator } from "./NameGenerator";
 import {
   deleteFile,
@@ -10,16 +10,6 @@ import {
   TMP_PATH,
   verifyFileExists,
 } from "../helpers";
-
-interface IDownload {
-  startItemDownload: () => Promise<any>;
-
-  download: (format: ALLOWED_EXTENSION, log: boolean) => Promise<unknown>;
-
-  downloadAndInsertVideoAudio: (
-    stream: ffmpeg.FfmpegCommand
-  ) => Promise<ffmpeg.FfmpegCommand | undefined>;
-}
 
 export class Download implements IDownload {
   private YOUTUBE_URL = "https://www.youtube.com/watch?v=";

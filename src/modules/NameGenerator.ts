@@ -1,9 +1,4 @@
-import { ALLOWED_EXTENSION } from "../interfaces/File";
-
-interface INameGenerator {
-  replaceTextCharacters: (title: string) => string;
-  randomNameGenerator: () => number;
-}
+import { INameGenerator } from "../interfaces";
 
 export class NameGenerator implements INameGenerator {
   replaceTextCharacters(title: string) {
