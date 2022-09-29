@@ -1,14 +1,9 @@
 import ytpl from "ytpl";
-import { ALLOWED_EXTENSION } from "../interfaces/File";
+import { ALLOWED_EXTENSION, IPlaylistInfo } from "../interfaces";
 import { from } from "rxjs";
 import { mergeMap, toArray } from "rxjs/operators";
 import { Download } from "./Download";
 import { MAX_PARALLEL_DOWNLOAD } from "../configs";
-
-interface IPlaylistInfo {
-  getPlaylistInfo: () => Promise<ytpl.Result>;
-  startPlaylistDownload: () => Promise<any>;
-}
 
 export class Playlist implements IPlaylistInfo {
   private fileFormat: ALLOWED_EXTENSION;
