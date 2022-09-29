@@ -41,7 +41,7 @@ npm i && npm run dev
 
 ## Usage
 
-1- Change your youtube playlist url in `src/index.ts` file
+1- Change your youtube playlist url in `src/configs/index.ts` file
 
 2- Run the step 3 of the [Installation](#installation) section
 
