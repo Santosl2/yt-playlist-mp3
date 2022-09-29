@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Download youtube playlist",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
-    "start": "node src/index.js"
+    "dev": "tsnd src/index.ts"
   },
   "keywords": [],
   "author": "Santosl2",
@@ -15,5 +14,10 @@
     "rxjs": "^7.5.6",
     "ytdl": "^1.4.1",
     "ytpl": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.20",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
   }
 }
