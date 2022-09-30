@@ -1,6 +1,6 @@
 {
   "name": "youtubepl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Download youtube playlist",
   "main": "src/index.ts",
   "scripts": {
