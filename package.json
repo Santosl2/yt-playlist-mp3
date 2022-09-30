@@ -4,9 +4,16 @@
   "description": "Download youtube playlist",
   "main": "src/index.js",
   "scripts": {
-    "dev": "tsnd src/index.ts"
+    "build": "tsc",
+    "dev": "tsnd  --exit-child src/index.ts"
   },
-  "keywords": [],
+  "keywords": [
+    "youtube",
+    "playlist",
+    "download",
+    "nodejs",
+    "typescript"
+  ],
   "author": "Santosl2",
   "license": "MIT",
   "dependencies": {
@@ -19,5 +26,13 @@
     "@types/fluent-ffmpeg": "^2.1.20",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santosl2/yt-playlist-mp3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Santosl2/yt-playlist-mp3/issues"
+  },
+  "homepage": "https://github.com/Santosl2/yt-playlist-mp3#readme"
 }
