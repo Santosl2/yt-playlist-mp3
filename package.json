@@ -2,10 +2,11 @@
   "name": "youtubepl",
   "version": "1.0.2",
   "description": "Download youtube playlist",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsnd  --exit-child src/index.ts"
+    "dev": "tsnd  --exit-child src/index.ts",
+    "prepare": "npm run build"
   },
   "keywords": [
     "youtube",

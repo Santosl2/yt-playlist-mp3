@@ -1,3 +1,3 @@
-import { Download, NameGenerator, Playlist } from "./modules";
+import { Download, Playlist } from "./modules";
 
 export { Download, Playlist };
