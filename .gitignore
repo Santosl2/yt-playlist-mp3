@@ -3,3 +3,4 @@ downloads/*.mp3
 downloads/*.mp4
 tmp/*
 build/
+dist/

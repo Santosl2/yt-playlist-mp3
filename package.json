@@ -1,5 +1,5 @@
 {
-  "name": "youtubepl",
+  "name": "youtube-pl",
   "version": "1.0.2",
   "description": "Download youtube playlist",
   "main": "dist/index.js",
