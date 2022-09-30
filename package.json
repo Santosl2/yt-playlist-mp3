@@ -1,6 +1,6 @@
 {
   "name": "youtube-pl",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Download youtube playlist",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,9 @@
     "prepare": "npm run build"
   },
   "files": [
-    "/dist"
+    "/dist",
+    "/tmp",
+    "/downloads"
   ],
   "keywords": [
     "youtube",
