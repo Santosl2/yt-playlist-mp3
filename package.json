@@ -1,13 +1,17 @@
 {
   "name": "youtube-pl",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Download youtube playlist",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsnd  --exit-child src/index.ts",
     "prepare": "npm run build"
   },
+  "files": [
+    "/dist"
+  ],
   "keywords": [
     "youtube",
     "playlist",
