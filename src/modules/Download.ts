@@ -90,7 +90,9 @@ export class Download implements IDownload {
             console.log("Download complete => ", video.title);
 
             // Delete Audio TMP file
-            deleteFile(TMP_PATH(this.fileName));
+            if (format === "mp4") {
+              deleteFile(TMP_PATH(this.fileName));
+            }
           }
 
           resolve(video);
