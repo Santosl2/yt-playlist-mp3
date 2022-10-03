@@ -1,4 +1,4 @@
-export const DOWNLOAD_FOLDER = "../../downloads/";
+export const DOWNLOAD_FOLDER = `${process.cwd()}/downloads`;
 
 export const TMP_FOLDER = "../../tmp/";
 
