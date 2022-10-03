@@ -1,12 +1,12 @@
 {
   "name": "youtube-pl",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Download youtube playlist",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsnd  --exit-child src/index.ts",
+    "dev": "tsnd  --exit-child src/download.ts",
     "prepare": "npm run build"
   },
   "files": [

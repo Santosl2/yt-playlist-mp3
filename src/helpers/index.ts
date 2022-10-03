@@ -2,8 +2,10 @@ import path from "path";
 import { existsSync, unlinkSync } from "fs";
 import { DOWNLOAD_FOLDER, TMP_FOLDER } from "../configs";
 
-export const DOWNLOAD_PATH = (fileName: string) =>
-  path.join(__dirname, DOWNLOAD_FOLDER, fileName);
+export const DOWNLOAD_PATH = (
+  fileName: string,
+  folder: string = DOWNLOAD_FOLDER
+) => path.join(__dirname, folder, fileName);
 
 export const TMP_PATH = (fileName: string) =>
   path.join(__dirname, TMP_FOLDER, fileName);

@@ -10,6 +10,7 @@ import {
   TMP_PATH,
   verifyFileExists,
 } from "../helpers";
+import { DOWNLOAD_FOLDER } from "../configs";
 
 export class Download implements IDownload {
   private YOUTUBE_URL = "https://www.youtube.com/watch?v=";
@@ -23,10 +24,12 @@ export class Download implements IDownload {
   constructor(
     private video: ytpl.Item,
     private fileFormat: ALLOWED_EXTENSION,
+    private downloadFolder: string = DOWNLOAD_FOLDER,
     private nameGenerator: NameGenerator = new NameGenerator()
   ) {
     this.fileFormat = fileFormat;
     this.video = video;
+    this.downloadFolder = downloadFolder;
   }
 
   async downloadAndInsertVideoAudio(
@@ -45,14 +48,17 @@ export class Download implements IDownload {
   ): Promise<unknown> {
     const { video } = this;
     const PATH = !isAudioDownload ? DOWNLOAD_PATH : TMP_PATH;
-
     if (!video) {
       console.log("Video is not defined");
       return;
     }
 
-    if (verifyFileExists(PATH(this.fileName))) {
-      console.log("File already exists => ", this.fileName);
+    const output = PATH(this.fileName, this.downloadFolder);
+
+    if (verifyFileExists(output)) {
+      console.log(
+        `File ${this.fileName} already exists in folder ${this.downloadFolder}`
+      );
       return;
     }
 
@@ -75,7 +81,7 @@ export class Download implements IDownload {
     const promise = new Promise((resolve, reject) => {
       command
         .format(format)
-        .output(PATH(this.fileName))
+        .output(output)
         .on("start", () => {
           if (!isAudioDownload) console.log("Downloading ", video.title);
         })

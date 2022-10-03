@@ -3,15 +3,21 @@ import { ALLOWED_EXTENSION, IPlaylistInfo } from "../interfaces";
 import { from } from "rxjs";
 import { mergeMap, toArray } from "rxjs/operators";
 import { Download } from "./Download";
-import { MAX_PARALLEL_DOWNLOAD } from "../configs";
+import { DOWNLOAD_FOLDER, MAX_PARALLEL_DOWNLOAD } from "../configs";
 
 export class Playlist implements IPlaylistInfo {
   private fileFormat: ALLOWED_EXTENSION;
   private playlistId: string;
+  private downloadFolder: string;
 
-  constructor(playlistId: string, fileFormat: ALLOWED_EXTENSION = "mp3") {
+  constructor(
+    playlistId: string,
+    fileFormat: ALLOWED_EXTENSION = "mp3",
+    downloadFolder = DOWNLOAD_FOLDER
+  ) {
     this.playlistId = playlistId;
     this.fileFormat = fileFormat;
+    this.downloadFolder = downloadFolder;
   }
 
   async getPlaylistInfo(): Promise<ytpl.Result> {
@@ -27,14 +33,20 @@ export class Playlist implements IPlaylistInfo {
     console.log(
       `Started ${
         playlistInfo.title
-      } playlist download in ${this.fileFormat.toUpperCase()} format`
+      } playlist download in ${this.fileFormat.toUpperCase()} format and ${
+        this.downloadFolder
+      } folder`
     );
 
     const videoObservable = from(playlistVideoItems);
     return videoObservable
       .pipe(
         mergeMap((video) => {
-          const downloadClass = new Download(video, this.fileFormat);
+          const downloadClass = new Download(
+            video,
+            this.fileFormat,
+            this.downloadFolder
+          );
 
           return downloadClass.startItemDownload();
         }, MAX_PARALLEL_DOWNLOAD)
