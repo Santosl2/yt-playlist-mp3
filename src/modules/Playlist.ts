@@ -21,7 +21,9 @@ export class Playlist implements IPlaylistInfo {
   }
 
   async getPlaylistInfo(): Promise<ytpl.Result> {
-    const playlistInfo = await ytpl(this.playlistId);
+    const playlistInfo = await ytpl(this.playlistId, {
+      pages: Infinity,
+    });
 
     return playlistInfo;
   }
