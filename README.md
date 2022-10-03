@@ -16,8 +16,6 @@ Download you favorite playlist from youtube with this simple script. You can dow
 - [Node.js](https://nodejs.org/it/download/) >= v10
 - [`ffmpeg`](https://www.ffmpeg.org/download.html) installed in your system
 
-<br/>
-
 # Installation
 
 1- Clone this repo
@@ -30,8 +28,6 @@ Download you favorite playlist from youtube with this simple script. You can dow
 yarn && yarn dev
 ```
 
-<br/>
-
 # Module Usage
 
 You can use this project in your project as a module.
@@ -40,7 +36,7 @@ You can use this project in your project as a module.
 yarn add youtube-pl
 ```
 
-## Example usage
+### Example usage
 
 ```typescript
 import { Playlist } from "youtube-pl";
@@ -54,8 +50,6 @@ const playlistDownload = new Playlist(
 playlistDownload.startPlaylistDownload();
 ```
 
-<br/>
-
 # Usage
 
 1- Change your youtube playlist url in `src/configs/index.ts` file
@@ -64,20 +58,14 @@ playlistDownload.startPlaylistDownload();
 
 3- You can find your files in the `downloads` folder
 
-<br/>
-
 # Settings
 
 You can change the settings in the `src/configs/index.ts` file
-
-<br/>
 
 # License
 
 Copyright [MIT](./LICENSE).
 
-<br/>
-
-## Special Thanks
+# Special Thanks
 
 - Eomm
