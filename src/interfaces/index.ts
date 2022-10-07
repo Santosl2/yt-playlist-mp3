@@ -23,3 +23,8 @@ export interface IPlaylistInfo {
   getPlaylistInfo: () => Promise<Result>;
   startPlaylistDownload: () => Promise<any>;
 }
+
+export interface YTItem {
+  id: string;
+  title: string;
+}

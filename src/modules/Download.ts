@@ -2,7 +2,7 @@ import ytpl from "ytpl";
 import ytdl from "ytdl-core";
 import ffmpeg from "fluent-ffmpeg";
 
-import { ALLOWED_EXTENSION, IDownload } from "../interfaces";
+import { ALLOWED_EXTENSION, IDownload, YTItem } from "../interfaces";
 import { NameGenerator } from "./NameGenerator";
 import {
   deleteFile,
@@ -22,8 +22,8 @@ export class Download implements IDownload {
   private fileName: string = "";
 
   constructor(
-    private video: ytpl.Item,
-    private fileFormat: ALLOWED_EXTENSION,
+    private video: YTItem | undefined = undefined,
+    private fileFormat: ALLOWED_EXTENSION = "mp3",
     private downloadFolder: string = DOWNLOAD_FOLDER,
     private nameGenerator: NameGenerator = new NameGenerator()
   ) {
@@ -42,13 +42,31 @@ export class Download implements IDownload {
     return stream.input(audioPath);
   }
 
+  async downloadSpecifyVideo(
+    url: string,
+    fileFormat: ALLOWED_EXTENSION = "mp3"
+  ) {
+    const video = await ytdl.getBasicInfo(url);
+
+    const { title, videoId } = video.videoDetails;
+
+    this.video = {
+      id: videoId,
+      title,
+    };
+
+    return this.startItemDownload(fileFormat);
+  }
+
   async download(
     format = this.fileFormat,
     isAudioDownload = false
   ): Promise<unknown> {
     const { video } = this;
+
     const PATH = !isAudioDownload ? DOWNLOAD_PATH : TMP_PATH;
-    if (!video) {
+
+    if (!video?.id) {
       console.log("Video is not defined");
       return;
     }
@@ -114,9 +132,10 @@ export class Download implements IDownload {
     fileFormat: ALLOWED_EXTENSION | undefined = undefined
   ) {
     const format = fileFormat || this.fileFormat;
+    const fileName = this.video?.title || "";
     try {
       this.fileName = `${this.nameGenerator.replaceTextCharacters(
-        this.video.title
+        fileName
       )}.${format}`;
 
       const ytFile = await this.download();
