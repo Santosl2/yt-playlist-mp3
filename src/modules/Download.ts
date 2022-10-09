@@ -133,12 +133,13 @@ export class Download implements IDownload {
   ) {
     const format = fileFormat || this.fileFormat;
     const fileName = this.video?.title || "";
+
     try {
       this.fileName = `${this.nameGenerator.replaceTextCharacters(
         fileName
       )}.${format}`;
 
-      const ytFile = await this.download();
+      const ytFile = await this.download(format);
       return ytFile;
     } catch (error) {
       console.log(error);
